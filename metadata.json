@@ -1,0 +1,6 @@
+{
+  "name": "SmartCart AI",
+  "description": "Intelligent grocery recommendation web application evaluating quality, unit-value, and shop proximity.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
