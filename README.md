@@ -1,87 +1,181 @@
-# SmartCart AI — Intelligent Grocery Recommendation Application
+# SmartCart AI 🛒
+### AI-Powered Grocery Comparison and Recommendation System
 
-SmartCart AI helps grocery shoppers identify the most sensible product purchase by mathematically evaluating three key factors:
+## 📌 Project Abstract
 
-1. **Product Quality (40%):** Bayesian-adjusted star rating `(n × R + m × C) / (n + m)` with prior rating `C = 3.5` and prior weight `m = 5`.
-2. **Quantity-for-Price Value (40%):** Standardized unit price normalization (grams to kg, ml to liters, count) compared across competing shop listings.
-3. **Shop Proximity (20%):** Haversine great-circle distance with a hyperbolic proximity decay function `100 / (1 + distanceKm × 0.12)`.
+SmartCart AI is a software project that helps customers compare grocery products across local shops. It evaluates price, quantity, customer ratings, product quality indicators, and shop distance to recommend suitable purchasing options. It also enables shop owners to manage product listings, pricing, and stock availability. The application emphasizes data-driven decisions, location-aware recommendations, security, and modular software design.
 
----
+## ✨ Key Features
 
-## 1. Demo Accounts (Ready to Test)
+- **🤖 Multi-Factor AI Recommendations:** Compares price, quantity, customer ratings, quality indicators, and shop distance to identify suitable products.
+- **📊 Smart Value Analysis:** Evaluates quantity per unit of price rather than comparing prices alone.
+- **📍 Location-Aware Comparison:** Uses customer and shop location details to consider proximity when recommending grocery options.
+- **🛍️ Customer Shopping Cart:** Supports selecting and managing grocery products for purchase.
+- **🏪 Shop Management:** Allows shop owners to manage product listings, prices, quantities, and stock availability.
 
-The database is pre-seeded with 1 customer, 3 shop owners, 3 shops, and 10 grocery items across 22 shop listings. You can use the **1-Click Demo Buttons** on `/login` or enter the credentials below:
+## 🧰 Tech Stack
 
-| Role | Email | Password | Location / Coordinates |
-| :--- | :--- | :--- | :--- |
-| **Customer** | `customer@example.com` | `password123` | Indiranagar, Bangalore (12.9784°N, 77.6408°E) |
-| **Owner 1 (Green Basket)** | `owner1@example.com` | `password123` | 100ft Road, Indiranagar (0.7 km away) |
-| **Owner 2 (Fresh Daily)** | `owner2@example.com` | `password123` | Domlur (1.9 km away) |
-| **Owner 3 (Metro Supermarket)** | `owner3@example.com` | `password123` | Whitefield (11.8 km away) |
+| Technology | Purpose |
+|---|---|
+| React | User interface and reusable components |
+| TypeScript | Application logic with static typing |
+| Vite | Development server and production build |
+| Supabase | Authentication and backend services |
+| PostgreSQL | Relational data storage |
+| Git and GitHub | Version control and source-code management |
+| Vercel | Frontend deployment and hosting |
 
----
+## 🗓️ Project Development Timeline
 
-## 2. Windows Local Setup Instructions
+The project was developed in six stages, with each stage focusing on a specific set of requirements and features.
 
-### Prerequisites
-- **Node.js**: Version 18 or higher (download from [nodejs.org](https://nodejs.org/)).
-- **Git**: Download from [git-scm.com](https://git-scm.com/).
-
-### Installation Steps (PowerShell / Command Prompt)
-
-```powershell
-# 1. Clone or navigate to the repository directory
-cd smartcart-ai
-
-# 2. Copy the environment variables example
-copy .env.example .env
-
-# 3. Install dependencies
-npm install
-
-# 4. Run unit tests to verify pure mathematical recommendation logic
-npm test
-
-# 5. Start the local full-stack server
-npm run dev
+```text
+ 09 JUL ─────────────── 23 JUL
+ Requirements analysis, UI planning
+ and database setup
+          │
+          ▼
+ 24 JUL ─────────────── 07 AUG
+ Customer UI development
+          │
+          ▼
+ 08 AUG ─────────────── 22 AUG
+ Shop-owner UI development
+          │
+          ▼
+ 23 AUG ─────────────── 06 SEP
+ Product management and database integration
+          │
+          ▼
+ 07 SEP ─────────────── 21 SEP
+ Multi-factor AI recommendations
+          │
+          ▼
+ 22 SEP ─────────────── 06 OCT
+ Order summaries and related functionality
+          │
+          ▼
+ 07 OCT ─────────────── 21 OCT
+ Testing, debugging and deployment
 ```
 
-Open your browser at `http://localhost:3000`.
+## 🔄 Software Development Journey
 
----
+### 01 — Requirements Analysis and Initial Setup
+**09 July – 23 July**
 
-## 3. Configuring Supabase and Gemini
+The development process began by identifying the needs of customers and shop owners and defining the main application workflows.
 
-### Supabase Setup
-1. Create a free project at [supabase.com](https://supabase.com).
-2. In the Supabase SQL Editor, run `supabase/schema.sql` to create the 6 tables, foreign keys, indexes, and Row Level Security policies.
-3. Run `supabase/seed.sql` to populate the demo shops, products, and listings.
-4. Copy your **Project URL** and **Anon Public Key** from *Project Settings > API*.
-5. Paste them in your `.env` file:
-   ```env
-   VITE_SUPABASE_URL="https://your-project.supabase.co"
-   VITE_SUPABASE_ANON_KEY="your-anon-key-here"
-   ```
+- Identified product comparison, shopping cart, and inventory management requirements.
+- Planned the user interface and core database entities.
+- Established the initial application structure and database setup.
+- Identified the product attributes needed for meaningful recommendations, including price, quantity, ratings, and location.
 
-*Note: SmartCart AI includes an automatic in-memory / persistent repository fallback that allows the application to run out-of-the-box with full cart submission and shop owner synchronization even before Supabase keys are configured.*
+**Outcome:** Defined the project scope and established the foundation for implementation.
 
-### Google Gemini API Setup
-1. Get an API key from [Google AI Studio](https://aistudio.google.com/).
-2. In `.env`, set:
-   ```env
-   GEMINI_API_KEY="your-gemini-api-key"
-   ```
-3. The server endpoint `POST /api/ai-explanation` queries `gemini-3.8-flash` to synthesize concise 1-2 sentence trade-off summaries based purely on the calculated numerical scores. If the key is omitted, it falls back seamlessly to deterministic local trade-off reasoning.
+### 02 — Customer Interface Development
+**24 July – 07 August**
 
----
+The customer-facing interface was developed around grocery discovery and purchasing decisions.
 
-## 4. Verification and Acceptance Checklist
+- Organized product information for browsing and comparison.
+- Developed customer workflows for selecting products and managing a shopping cart.
+- Planned how product prices, quantities, and ratings would be presented.
+- Structured the interface around the customer's shopping requirements.
 
-- [x] **Customer Authentication**: Customer can sign up, log in, and view only the customer discovery and cart interfaces.
-- [x] **Owner Authentication**: Shop owner logs in and accesses only their store's owner portal (`/owner`).
-- [x] **Grocery Catalog & Comparison**: All 10 grocery items can be compared side-by-side across all 3 local shops with unit rates.
-- [x] **Deterministic Recommendation Engine**: Bayesian rating, unit price value, and Haversine distance scoring (verified via 9 automated unit tests).
-- [x] **Single-Shop Cart Policy**: Prevents mixing products from different shops in one order request, with clear confirmation prompt.
-- [x] **Order Request Submission**: Atomically validates stock, decrements inventory, and assigns submitted status.
-- [x] **Shop Owner Visibility**: Submitted customer carts appear in real time in the corresponding shop owner's dashboard with customer delivery location, item breakdown, and total.
-- [x] **Design & Theme**: White + green theme (`#F8FBF8`, `#218838`), Lora headings, Arial body text, minimum font size 14px, responsive on mobile and desktop.
+**Outcome:** Established the customer-facing workflow for discovering and comparing groceries.
+
+### 03 — Shop-Owner Interface Development
+**08 August – 22 August**
+
+The shop-owner interface focused on maintaining shop-specific product information.
+
+- Developed workflows for shop-owner operations.
+- Structured the interface around shop details and product listings.
+- Considered the information required to manage prices and available stock.
+- Separated customer-facing operations from shop-management workflows.
+
+**Outcome:** Established the shop-owner side of the application.
+
+### 04 — Product Management and Database Integration
+**23 August – 06 September**
+
+Product management and persistent data storage were developed around the relationship between shops and their listings.
+
+- Organized product, shop, and shop-product data in a relational structure.
+- Integrated the application with Supabase and PostgreSQL.
+- Used product attributes such as price, pack size, ratings, and stock in shop listings.
+- Investigated database query and data-relationship issues during integration.
+
+**Outcome:** Connected product and shop information to the application's data layer.
+
+### 05 — Multi-Factor Recommendation Development
+**07 September – 21 September**
+
+The recommendation functionality was designed to evaluate multiple factors instead of choosing products solely by the lowest price.
+
+- **Price:** Compare the cost of available product options.
+- **Quantity:** Evaluate quantity offered relative to price.
+- **Quality indicators:** Use customer ratings as an indicator of perceived product quality.
+- **Distance:** Consider the customer's location relative to each shop.
+- **Trade-offs:** Evaluate cases where a higher-rated or closer option may be preferable to a cheaper alternative.
+
+**Outcome:** Developed the basis for multi-factor grocery recommendations.
+
+*The recommendation description should match the actual implementation. If the logic uses deterministic scoring rules rather than a trained model or generative AI, it is more accurately described as a multi-factor recommendation engine.*
+
+### 06 — Order Summaries, Testing and Deployment
+**22 September – 21 October**
+
+The final development stage focused on related shopping functionality, validation, debugging, and deployment.
+
+- Worked on order summaries and related application workflows.
+- Checked product records and shop-product relationships in the database.
+- Investigated configuration and integration errors.
+- Prepared the application for production hosting and configured the deployment environment.
+- Addressed issues affecting product data consistency and application behavior.
+
+**Outcome:** Completed the development cycle and deployed the application.
+
+## 🔐 Security, Location and Software Design
+
+### Security and Data Protection
+- Uses Supabase authentication and database services.
+- Requires appropriate database access policies and role-based permissions to protect customer and shop-owner data.
+- Keeps privileged API keys and service-role credentials out of frontend code.
+- Uses environment variables for application configuration.
+
+*Security depends on the actual authentication setup, Row Level Security policies, and deployment configuration. These controls should be verified before describing the application as fully secure.*
+
+### Location-Aware Recommendations 📍
+- Stores or uses customer and shop location details for proximity comparisons.
+- Allows recommendations to consider distance alongside price, quantity, and ratings.
+- Supports trade-offs between nearby shops and potentially better-value options farther away.
+
+Distance calculations depend on valid coordinates and the calculation method used. Straight-line distance and road distance are not equivalent.
+
+### Encapsulation and Modular Design
+- Organizes functionality into distinct application components and feature modules.
+- Separates customer workflows from shop-owner workflows.
+- Keeps product information, shop listings, and shopping-cart data organized into related database entities.
+- Supports changes to individual features without requiring the entire application to be redesigned.
+
+Encapsulation is reflected in the organization of application logic and components; stronger claims about private state, class-based encapsulation, or formal architectural patterns should depend on the actual code.
+
+## 🧪 Testing and Maintenance
+
+Testing and debugging focused on database consistency, product comparisons, application configuration, and recommendation scenarios involving different prices, quantities, ratings, and distances.
+
+Future maintenance can include:
+
+- Improving recommendation scoring and explanations.
+- Expanding validation for incomplete or inconsistent product data.
+- Improving access control and error handling.
+- Refining the user experience and adding regression tests.
+
+## 🚀 Deployment Status
+
+**SmartCart AI is deployed on Vercel.**
+
+The production application uses the configured frontend build and Supabase services. Deployment configuration, environment variables, database availability, and access policies remain important to the application's continued operation.
+
